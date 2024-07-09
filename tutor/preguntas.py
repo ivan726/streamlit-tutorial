@@ -35,7 +35,7 @@ with st.expander("¿Cómo puedo graficar valores tabulados?"):
             datos = np.zeros((num, 2))
             datos[:, 0] = np.arange(num)
             datos[:, 1] = np.random.randint(-10, 10, num)
-            datos = st.data_editor(datos, use_container_width=True, column_config={"0":st.column_config.NumberColumn("x"), "1":st.column_config.NumberColumn("y")})
+            datos = st.data_editor(datos, use_container_width=True, column_config={"0":"x", "1":"y"})
 
         with c2:
             fig, ax = plt.subplots()
@@ -58,7 +58,7 @@ with st.expander("¿Cómo puedo tabular una función?"):
             c11, c12 = st.columns(2)
             with c11:
                 datos_x = np.linspace(-5, 5, num)
-                datos_x = st.data_editor(datos_x, use_container_width=True, column_config={"value":st.column_config.NumberColumn("x")})
+                datos_x = st.data_editor(datos_x, use_container_width=True, column_config={"value":"x"})
             with c12:
                 datos_y = datos_x**2
                 datos_y = st.data_editor(datos_y, use_container_width=True, column_config={"value":st.column_config.NumberColumn("f(x)", disabled=True)})
@@ -76,3 +76,31 @@ with st.expander("¿Cómo puedo tabular una función?"):
             st.pyplot(fig)                  # mostrar
 
 
+with st.expander("¿Cómo graficar figuras geométricas?"):
+    st.markdown('''
+    Para crear un polinomio se utiliza el comando `ax.add_patch()` y dentro de este comando se crea un poligono con los vertices de la figura (con el comando `plt.Polygon(puntos, closed=True)`).
+    ''')
+
+    with st.echo():
+        c1, c2 = st.columns([2,4])
+
+        with c1:
+            st.caption("Puntos")
+            puntos = st.data_editor([[1,1],[2,7],[5,1]], use_container_width=True, column_config={"0":"x", "1":"y"})
+        
+        with c2:
+            fig, ax = plt.subplots()
+            ax.add_patch(plt.Polygon(puntos, closed=True, color="salmon"))
+            ax.set_xlim(0,10)
+            ax.set_ylim(0,10)
+            st.pyplot(fig)
+
+with st.expander("¿Cómo puedo ingresar una ecuación?"):
+    with st.echo():
+        formula = st.text_input("$f(x):$", placeholder="x^2 + 3x - 5", help="Ingrese la ecuación en formato latex.")
+        st.markdown(f'''
+        La función ingresada es:
+        $$
+        f(x) = {formula}
+        $$
+        ''')

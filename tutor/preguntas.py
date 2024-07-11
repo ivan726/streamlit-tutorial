@@ -16,7 +16,7 @@ with st.expander("¿Cómo se podría ingresar una matriz en Streamlit?"):
             ncol = int(st.number_input("Columnas:", value=2, min_value=1))
         
         with c2:
-            mat = st.data_editor(np.zeros((nfil, ncol)), use_container_width=True, column_config={str(c):st.column_config.NumberColumn('') for c in range(ncol)})
+            mat = st.data_editor(np.zeros((nfil, ncol)), use_container_width=True, column_config={"0":"", "1":""})
 
 
 with st.expander("¿Cómo se podría ingresar un rango en Streamlit?"):
@@ -104,3 +104,12 @@ with st.expander("¿Cómo puedo ingresar una ecuación?"):
         f(x) = {formula}
         $$
         ''')
+
+with st.expander("¿Cómo puedo ingresar textos en una fórmula?"):
+    st.markdown('Es posible ingresar variables en una ecuación mediante un f-string de python.')
+    with st.echo():
+        st.latex("f(x) = \\frac{x^2+5}{x}")
+        x = st.number_input("$x:$", value=1.5, min_value=0.1)
+        f = (x**2 + 5)/(x)
+        st.latex(f"f({x}) = \\frac{{({x})^2+5}}{{{x}}} = {f:.2f} ")
+

@@ -3,7 +3,8 @@ import streamlit as st
 pg = st.navigation({
     "Resumen":[
         st.Page("tutor/comandos.py", title="Comandos", icon=":material/code:"),
-        st.Page("tutor/preguntas.py", title="Preguntas", icon=":material/question_mark:")
+        st.Page("tutor/preguntas.py", title="Preguntas", icon=":material/question_mark:"),
+        st.Page("tutor/expos.py", title="Exposiciones", icon=":material/co_present:"),
     ],
     "Ejemplos":[
         st.Page("examples/juego.py", title="Adivinador", icon="🔮"),
